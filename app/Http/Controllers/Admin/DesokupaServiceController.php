@@ -1,0 +1,184 @@
+<?php
+
+namespace App\Http\Controllers\Admin;
+
+use App\Http\Controllers\Controller;
+use App\DesokupaService;
+use App\DesokupaSection;
+use App\ManageText;
+use Illuminate\Http\Request;
+use Intervention\Image\Facades\Image as Image;
+use Illuminate\Support\Facades\File;
+use App\NotificationText;
+use App\ValidationText;
+
+class DesokupaServiceController extends Controller
+{
+
+    public function __construct()
+    {
+        $this->middleware('auth:admin');
+    }
+
+    public function index()
+    {
+        $desokupaservice=DesokupaService::all();
+        $desokupasection=DesokupaSection::all();
+        $websiteLang=ManageText::all();
+        return view('admin.desokupaservice.index',compact('desokupaservice','websiteLang'));
+    }
+
+
+    public function store(Request $request)
+    {
+        // VERIFICAR MODO DEMO
+        if(env('PROJECT_MODE')==0){
+            $notification=array(
+                'messege'=>env('NOTIFY_TEXT'),
+                'alert-type'=>'error'
+            );
+
+            return redirect()->back()->with($notification);
+        }
+        // FIN
+
+        $valid_lang=ValidationText::all();
+        $rules = [
+            'image'=>'required',
+            'name'=>'required',
+            'description'=>'required|max:100'
+
+        ];
+        $customMessages = [
+            'image.required' => $valid_lang->where('lang_key','img')->first()->custom_text,
+            'name.required' => $valid_lang->where('lang_key','name')->first()->custom_text,
+            'description.required' => $valid_lang->where('lang_key','description')->first()->custom_text,
+            'description.max'=> $valid_lang->where('lang_key','description.max')->first()->custom_text
+        ];
+        $this->validate($request, $rules, $customMessages);
+
+         // GUARDAR IMAGEN
+         $image=$request->image;
+         $extention=$image->getClientOriginalExtension();
+         $name= 'partner-'.date('Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
+         $image_path='uploads/custom-images/services/'.$name;
+
+         Image::make($image)
+         ->save(public_path().'/'.$image_path);
+
+
+        $desokupaservice=new DesokupaService();
+        $desokupaservice->image=$image_path;
+        $desokupaservice->name=$request->name;
+
+        $desokupaservice->status=$request->status;
+        $desokupaservice->save();
+
+        $notify_lang=NotificationText::all();
+        $notification=$notify_lang->where('lang_key','create')->first()->custom_text;
+        $notification=array('messege'=>$notification,'alert-type'=>'success');
+
+        return redirect()->route('admin.desokupaservice.index')->with($notification);
+    }
+
+    public function update(Request $request, DesokupaService $desokupaservice)
+    {
+
+        // VERIFICAR MODO DEMO
+        if(env('PROJECT_MODE')==0){
+            $notification=array(
+                'messege'=>env('NOTIFY_TEXT'),
+                'alert-type'=>'error'
+            );
+
+            return redirect()->back()->with($notification);
+        }
+        // FIN
+
+
+        $valid_lang=ValidationText::all();
+        $rules = [
+            'name'=>'required',
+            'description'=>'required|max:100'
+        ];
+        $customMessages = [
+            'name.required' => $valid_lang->where('lang_key','name')->first()->custom_text,
+            'description.required' => $valid_lang->where('lang_key','description')->first()->custom_text,
+            'description.max'=> $valid_lang->where('lang_key','description.max')->first()->custom_text
+
+        ];
+        $this->validate($request, $rules, $customMessages);
+
+
+        if($request->image){
+            $old_image=$desokupaservice->image;
+            $image=$request->image;
+            $extention=$image->getClientOriginalExtension();
+            $name= 'partner-'.date('Y-m-d-h-i-s-').rand(999,9999).'.'.$extention;
+            $image_path='uploads/custom-images/services/'.$name;
+
+            Image::make($image)
+                ->save(public_path().'/'.$image_path);
+
+            $desokupaservice->image=$image_path;
+            $desokupaservice->save();
+            if(File::exists(public_path().'/'.$old_image))unlink(public_path().'/'.$old_image);
+        }
+
+        $desokupaservice->name=$request->name;
+        $desokupaservice->description=$request->description;
+        $desokupaservice->status=$request->status;
+        $desokupaservice->save();
+
+        $notify_lang=NotificationText::all();
+        $notification=$notify_lang->where('lang_key','update')->first()->custom_text;
+        $notification=array('messege'=>$notification,'alert-type'=>'success');
+
+        return redirect()->route('admin.desokupaservice.index')->with($notification);
+    }
+
+    public function destroy(DesokupaService $desokupaservice)
+    {
+
+        // VERIFICAR MODO DEMO
+        if(env('PROJECT_MODE')==0){
+            $notification=array(
+                'messege'=>env('NOTIFY_TEXT'),
+                'alert-type'=>'error'
+            );
+
+            return redirect()->back()->with($notification);
+        }
+        // end
+
+
+        $old_image=$desokupaservice->image;
+        $desokupaservice->delete();
+
+        if(File::exists(public_path().'/'.$old_image))unlink(public_path().'/'.$old_image);
+
+        $notify_lang=NotificationText::all();
+        $notification=$notify_lang->where('lang_key','delete')->first()->custom_text;
+        $notification=array('messege'=>$notification,'alert-type'=>'success');
+
+        return redirect()->route('admin.consultingservice.index')->with($notification);
+    }
+
+    public function changeStatus($id){
+        $desokupaservice=DesokupaService::find($id);
+        if($desokupaservice->status==1){
+            $desokupaservice->status=0;
+            $notify_lang=NotificationText::all();
+            $notification=$notify_lang->where('lang_key','inactive')->first()->custom_text;
+            $message=$notification;
+        }else{
+            $desokupaservice->status=1;
+            $notify_lang=NotificationText::all();
+            $notification=$notify_lang->where('lang_key','active')->first()->custom_text;
+            $message=$notification;
+        }
+        $desokupaservice->save();
+        return response()->json($message);
+
+    }
+}
