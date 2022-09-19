@@ -64,7 +64,7 @@ class RealestateHomeController extends Controller
         $service_bg=BannerImage::find(23);
         $agents=User::where('status',1)->orderBy('id','desc')->get();
         $orders=Order::where(['status'=>1])->get();
-        $blogs=Blog::where(['status'=>1,'show_homepage'=>1])->get();
+        $blogs=Blog::where(['modelo'=>'realestate','status'=>1,'show_homepage'=>1])->get();
         $default_profile_image=BannerImage::find(15);
         $testimonials=Testimonial::where('status',1)->get();
         $propertyTypes=PropertyType::where('status',1)->orderBy('type','asc')->get();

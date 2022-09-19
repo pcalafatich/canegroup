@@ -6,13 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 use App\Admin;
-use Hash;
+use Illuminate\Support\Facades\Hash;
 use App\BannerImage;
 use App\NotificationText;
 use App\ValidationText;
 use App\ManageText;
+
 class AdminLoginController extends Controller
 {
 

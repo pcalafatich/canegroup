@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\ContactMessage;
 use App\Setting;
 use App\EmailTemplate;
-//use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactMessageInformation;
 use App\Rules\Captcha;
@@ -23,7 +22,7 @@ class ContactController extends Controller
 
     public function sendMessage(Request $request){
 
-        // project demo mode check
+    // VERIFICAR MODO DEMO
         if(env('PROJECT_MODE')==0){
             $notification=array(
                 'messege'=>env('NOTIFY_TEXT'),
@@ -32,7 +31,7 @@ class ContactController extends Controller
 
             return redirect()->back()->with($notification);
         }
-        // end
+        // FIN
 
         $valid_lang=ValidationText::all();
         $rules = [

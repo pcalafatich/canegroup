@@ -56,12 +56,6 @@ return [
         ],
 
 
-
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
 
@@ -84,8 +78,6 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
-
-
     ],
 
     /*

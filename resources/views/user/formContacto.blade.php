@@ -17,7 +17,7 @@
       <div class="col-12>
         <div class="wsus__contact_question">
           <h5>{{ $websiteLang->where('lang_key','contact_us')->first()->custom_text }}</h5>
-          <form method="POST" action="{{ route('contact.message') }}">git
+          <form method="POST" action="{{ route('contact.message') }}">
           @csrf
             <div class="row">
               <div class="col-xl-6 col-lg-6">

@@ -38,7 +38,9 @@
                 </div>
               </div>
               <div class="col-12">
-                <div > {!! clean($aboutUs->about) !!}     </div>
+                {{-- <div > {!! clean($aboutUs->about) !!}     </div> --}}
+                <div > {!! $aboutUs->about !!}     </div>
+  
                 <a href="{{ route('desokupa.about.us') }}">{{ $websiteLang->where('lang_key','read_more')->first()->custom_text }}</a>
               </div>
           </div>
@@ -46,7 +48,7 @@
       </div>
       <div class="col-xl-5 col-lg-5">
         <div class="wsus__about_img">
-          <img src="{{ asset($aboutUs->image) }}" alt="about images" class="img-fluid w-100">
+          <img src="{{ asset('uploads/website-images/desalojo.jpg') }}" alt="about images" class="img-fluid w-100">
         </div>
       </div>
 
@@ -56,12 +58,15 @@
   <!--===== FIN ABOUT=====-->
 @endif
 
+@include('user.valores');
+@include('user.pasos');
+@include('user.elegirnos')
 
 <!--=====BLOG START=====-->
 @php
   $blog_section=$sections->where('id',7)->first();
 @endphp
-@if ($blog_section->show_homepage==1)
+{{-- @if ($blog_section->show_homepage==1) --}}
   <section class="wsus__blog mt_90 xs_mt_70">
     <div class="container">
       <div class="row">
@@ -124,7 +129,7 @@
       </div>
     </div>
   </section>
-  @endif
+  {{-- @endif --}}
   <!--=====BLOG END=====-->
 
 

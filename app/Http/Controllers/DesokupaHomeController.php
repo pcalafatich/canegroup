@@ -35,6 +35,8 @@ use App\Admin;
 use App\User;
 use App\Helpers\MailHelper;
 use App\Overview;
+use App\DesokupaSection;
+use App\DesokupaService;
 use App\Service;
 use App\Faq;
 use App\Package;
