@@ -1,4 +1,4 @@
-@extends('layouts.user.layout')
+@extends($layout)
 @section('title')
     <title>{{ $seo_text->title }}</title>
 @endsection

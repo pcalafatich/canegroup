@@ -3,7 +3,7 @@
 @endphp
 
 <style>
-.wsus__topbar,
+/* .wsus__topbar, */
 .common_btn,
 .login_icon a:hover,
 .wsus__single_property_img .rent,

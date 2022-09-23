@@ -98,7 +98,7 @@ Route::group(['domain' => 'consulting.canevarigroup'], function() {
     Route::get('/blog-search',[ConsultingHomeController::class,'blogSearch'])->name('blog.search');
     Route::post('/blog-comment/{id}',[ConsultingHomeController::class,'blogComment'])->name('blog.comment');
     Route::get('/faq',[ConsultingHomeController::class,'faq'])->name('faq');
-    Route::get('/contact-us',[ConsultingController::class,'contactUs'])->name('contact.us');
+    Route::get('/contact-us',[ConsultingHomeController::class,'contactUs'])->name('contact.us');
     Route::post('contact-message',[ContactController::class,'sendMessage'])->name('contact.message');
     Route::get('terms-and-conditions',[ConsultingHomeController::class,'termsCondition'])->name('terms-and-conditions');
     Route::get('privacy-policy',[ConsultingHomeController::class,'privacyPolicy'])->name('privacy-policy');

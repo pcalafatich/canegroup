@@ -1,4 +1,4 @@
-@extends('layouts.consulting.layout')
+@extends($layout)
 @section('title')
     <title>{{ $page->seo_title }}</title>
 @endsection
@@ -28,14 +28,14 @@
 <section class="wsus__custome_page mt_40 mb_20">
     <div class="container">
         <div class="row">
-            <div class="col-8">
+            <div class="col-xl-8 col-sm-12">
                 <div class="wsus__privacy_text">
                     {!! clean($page->description) !!}
                 </div>
             </div>
 
             {{-- FORMULARIO DE CONTACTO RAPIDO --}}
-            <div class="col-xl-4" id="sticky_sidebar">
+            <div class="col-xl-4 col-sm-12" id="sticky_sidebar">
                 <form class="wsus__quick_contact" id="listingAuthContactForm">
                 @csrf @csrf
                 <div class="row">

@@ -58,9 +58,9 @@
   <!--===== FIN ABOUT=====-->
 @endif
 
-@include('user.valores');
-@include('user.pasos');
-@include('user.elegirnos')
+@include('desokupa.valores');
+@include('desokupa.pasos');
+@include('desokupa.elegirnos')
 
 <!--=====BLOG START=====-->
 @php

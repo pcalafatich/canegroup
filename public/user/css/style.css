@@ -138,14 +138,14 @@ textarea:focus-visible {
 
 .wsus__topbar {
     width: 100%;
-    height: 40px;
-    background: #0a547a;
+    height: 50px;
+    background: #111111;
 }
 
 .wsus__topbar__ucrania {
     width: 100%;
-    height: 25px;
-    margin: auto;
+    height: 50px;
+    /* margin: auto; */
     background: #0a547a;
     color: #fff !important;
     align-items: center;

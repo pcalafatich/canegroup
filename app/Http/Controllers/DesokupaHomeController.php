@@ -50,6 +50,7 @@ class DesokupaHomeController extends Controller
 {
 
     public function index(){
+        $layout= 'layouts.desokupa.layout';
         $sliders =Slider::orderBy('id','asc')->where([['modelo','desokupa'],['status',1]])->get();
         $aboutUs = About::where('modelo','desokupa')->first();
         $overviews=Overview::where('status',1)->get();
@@ -71,7 +72,7 @@ class DesokupaHomeController extends Controller
         $agent_bg=BannerImage::find(26);
         $websiteLang=ManageText::all();
 
-        return view('desokupa.index',compact('sliders','aboutUs', 'overviews','sections','services','currency','seo_text','service_bg','agents','orders','blogs','default_profile_image','testimonials','cities','feature_image','testimonial_bg','contact','contactSetting','agent_bg','websiteLang'));
+        return view('desokupa.index',compact('layout','sliders','aboutUs', 'overviews','sections','services','currency','seo_text','service_bg','agents','orders','blogs','default_profile_image','testimonials','cities','feature_image','testimonial_bg','contact','contactSetting','agent_bg','websiteLang'));
     }
 
 

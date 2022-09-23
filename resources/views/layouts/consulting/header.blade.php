@@ -38,19 +38,22 @@
   @if ($setting->text_direction=="RTL")
     <link rel="stylesheet" href="{{ asset('user/css/rtl.css') }}">
   @endif
-
   <link rel="stylesheet" href="{{ asset('user/css/dev.css') }}">
-
+  
   <link rel="stylesheet" href="{{ asset('toastr/toastr.min.css') }}">
-
+  
   @include('user.theme_style')
-    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-    <script src="{{ asset('user/js/jquery-3.6.0.min.js') }}"></script>
-    <script src="{{ asset('user/js/sweetalert2@11.js') }}"></script>
-    <script src="{{ asset('user/js/owl/owl.carousel.min.js') }}"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src="{{ asset('user/js/jquery-3.6.0.min.js') }}"></script>
+  <script src="{{ asset('user/js/sweetalert2@11.js') }}"></script>
+  <script src="{{ asset('user/js/owl/owl.carousel.min.js') }}"></script>
 
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    @if ($setting->google_analytic==1)
+  <!-- TOPBARSCROLL -->
+  <script src="{{ asset('user/js/jquery.newsTicker.min.js') }}"></script>
+  <link rel="stylesheet" href="{{ asset('user/css/topbarscroll.css') }}">
+
+  <!-- GOOGLE ANALYTICS (gtag.js) -->
+  @if ($setting->google_analytic==1)
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ $setting->google_analytic_code }}"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -58,20 +61,21 @@
         gtag('js', new Date());
         gtag('config', '{{ $setting->google_analytic_code }}');
     </script>
-    @endif
+  @endif
 </head>
 
 <body>
     
-  @include('layouts.ucrania')            
+  @include('layouts.ucrania')
+              
   <!--=====TOPBAR START=====-->
   <section class="wsus__topbar">
     <div class="container">
       <div class="row">
         <div class="col-xl-6 col-12 col-sm-8">
           <ul class="wsus__topbar_left d-flex align-items-center">
-            <li><a href="callto:{{ $topbar_contact->topbar_phone }}"><i class="fal fa-mobile"></i> {{ $topbar_contact->topbar_phone }}</a></li>
-            <li><a href="maolto:{{ $topbar_contact->topbar_email }}"><i class="fas fa-envelope"></i> {{ $topbar_contact->topbar_email }}</a></li>
+            <li><a href="tel:{{ $topbar_contact->topbar_phone }}"><i class="fal fa-mobile"></i> {{ $topbar_contact->topbar_phone }}</a></li>
+            <li><a href="mailto:{{ $topbar_contact->topbar_email }}"><i class="fas fa-envelope"></i> {{ $topbar_contact->topbar_email }}</a></li>
           </ul>
         </div>
         <div class="col-xl-6 col-sm-4 d-none d-sm-block">
@@ -102,13 +106,27 @@
   <!--=====MAIN MENU START=====-->
   <nav class="navbar navbar-expand-lg main_menu">
     <div class="container">
-      <a class="navbar-brand" href="{{ route('home') }}">
-        <img src="{{ url($setting->logo) }}" alt="logo" class="img-fluid w-100">
-      </a>
+      <!-- BOTON IZQUIERDO -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <i class="fal fa-align-justify"></i>
       </button>
+      <!-- FIN BOTON IZQUIERDO -->
+
+      <!-- LOGO -->
+      <a class="navbar-brand" href="{{ route('consulting.home') }}">
+        <img src="{{ url($setting->logo) }}" alt="logo" class="img-fluid w-100">
+      </a>
+      <!-- FIN LOGO -->
+
+      <!-- BOTON DERECHO -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContactContent"
+        aria-controls="navbarContactContent" aria-expanded="false" aria-label="Toggle navigation">
+        <i class="fal fa-phone"></i>
+      </button>
+      <!-- FIN BOTON DERECHO -->
+
+      <!-- TARGET BOTON IZQUIERDO -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav m-auto mb-2 mb-lg-0">
 
@@ -207,6 +225,32 @@
             </ul>
         @endif
       </div>
+      <!-- FIN TARGET BOTON IZQUIERDO -->
+
+      <!-- TARGET BOTON DERECHO -->
+      <div class="collapse navbar-collapse" id="navbarContactContent">
+        <ul class="d-md-none navbar-nav m-auto mb-2 mb-lg-0">
+            {{-- TELEFONO --}}
+            <li class="nav-item">
+                {{-- <a class="nav-link {{ Route::is('consulting.home') ? 'active' : '' }}" aria-current="page" href="{{ url('/') }}">{{ $home_menu->navbar }}</a> --}}
+                <a class="nav-link {{ Route::is('consulting.home') ? 'active' : '' }}" aria-current="page" href="{{ url('/') }}">TELEFONO</a>
+            </li>
+            {{-- CORREO --}}
+            <li class="nav-item">
+              {{-- <a class="nav-link {{ Route::is('consulting.home') ? 'active' : '' }}" aria-current="page" href="{{ url('/') }}">{{ $home_menu->navbar }}</a> --}}
+              <a class="nav-link {{ Route::is('consulting.home') ? 'active' : '' }}" aria-current="page" href="{{ url('/') }}">CORREO</a>
+          </li>
+          {{-- DOMICILIO --}}
+          <li class="nav-item">
+            {{-- <a class="nav-link {{ Route::is('consulting.home') ? 'active' : '' }}" aria-current="page" href="{{ url('/') }}">{{ $home_menu->navbar }}</a> --}}
+            <a class="nav-link {{ Route::is('consulting.home') ? 'active' : '' }}" aria-current="page" href="{{ url('/') }}">DOMICILIO</a>
+        </li>
+        </ul>
+      </div>
+      <!-- FIN TARGET BOTON DERECHO -->    
+
+  
+      
     </div>
   </nav>
   <!--=====MAIN MENU END=====-->

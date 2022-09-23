@@ -14,6 +14,14 @@ $(function () {
             }
         });
     }
+
+    //=========TOPBARSCROLL =========
+    $('#topbarscroll').newsTicker({
+        row_height: 60,
+        max_rows: 1,
+        speed: 500,
+        duration: 2000,
+      });  
     
     //*=======BANNER SLIDER====== 
     $('.banner_slider').slick({

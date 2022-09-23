@@ -23,14 +23,14 @@
 
         $("#subscribeBtn").on('click',function(e) {
             e.preventDefault();
-            // project demo mode check
+            // VERIFICAR MODO DEMO
             var isDemo="{{ env('PROJECT_MODE') }}"
             var demoNotify="{{ env('NOTIFY_TEXT') }}"
             if(isDemo==0){
                 toastr.error(demoNotify);
                 return;
             }
-            // end
+            // FIN
 
             $("#subscribe-spinner").removeClass('d-none')
             $("#subscribeBtn").addClass('custom-opacity')

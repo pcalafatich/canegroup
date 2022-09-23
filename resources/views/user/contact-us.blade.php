@@ -1,5 +1,5 @@
 
-@extends('layouts.user.layout')
+@extends($layout)
 @section('title')
 <title>{{ $seo_text->title }}</title>
 @endsection
@@ -8,7 +8,7 @@
 @endsection
 @section('user-content')
 
-  <!--===BREADCRUMB PART START====-->
+  <!--=== INICIO BREADCRUMB ====-->
   <section class="wsus__breadcrumb" style="background: url({{ url($banner_image->image) }});">
     <div class="wsus_bread_overlay">
         <div class="container">
@@ -26,7 +26,7 @@
         </div>
     </div>
 </section>
-<!--===BREADCRUMB PART END====-->
+<!--=== FIN BREADCRUMB====-->
 
 
 <!--========= CONTACTO MAIL - TELEFONO - DOMICILIO ============-->
@@ -58,20 +58,9 @@
                 </div>
             </div>
         </div>
-
-@include('user.formContacto');
-
-      <!--========= MAPA DE GOOGLE ============-->
-      <div class="row mt_45">
-        <div class="col-12">
-          <div class="wsus__con_map">
-            {!! $contact->map_embed_code !!}
-          </div>
-        </div>
-      </div>
-      <!--========= FIN MAPA DE GOOGLE ============-->
-
+    @include('user.formContacto')
+    @include('user.googlemap')
     </div>
 </section>
-<!--=========CONTACT PAGE END==========-->
+<!--========= FIN CONTACTO==========-->
 @endsection

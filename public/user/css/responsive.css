@@ -10,6 +10,8 @@
     .list_view .tk {
         font-size: 14px;
     }
+
+    
 }
 
 
@@ -372,6 +374,11 @@
     }
 
     #navbarSupportedContent {
+        background: #fff;
+        margin-top: 15px;
+    }
+
+    #navbarContactContent {
         background: #fff;
         margin-top: 15px;
     }
@@ -805,6 +812,11 @@
     }
 
     #navbarSupportedContent {
+        background: #fff;
+        margin-top: 17px;
+    }
+
+    #navbarContactContent {
         background: #fff;
         margin-top: 17px;
     }
@@ -1378,6 +1390,11 @@
         margin-top: 17px;
     }
 
+    #navbarContactContent {
+        background: #fff;
+        margin-top: 17px;
+    }
+
     .main_menu .navbar-nav .nav-item .nav-link {
         line-height: 75px;
         text-align: center;
@@ -1386,7 +1403,7 @@
 
     .main_menu {
         border-bottom: 1px solid #f02c2d;
-        padding: 18px 0;
+        padding: 10px 0;
     }
 
     .login_icon {

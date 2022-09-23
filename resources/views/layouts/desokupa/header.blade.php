@@ -49,6 +49,10 @@
     <script src="{{ asset('user/js/sweetalert2@11.js') }}"></script>
     <script src="{{ asset('user/js/owl/owl.carousel.min.js') }}"></script>
 
+    {{-- TOPBARSCROLL --}}
+    <script src="{{ asset('user/js/jquery.newsTicker.min.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('user/css/topbarscroll.css') }}">
+
     <!-- Global site tag (gtag.js) - Google Analytics -->
     @if ($setting->google_analytic==1)
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ $setting->google_analytic_code }}"></script>

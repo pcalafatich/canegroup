@@ -29,6 +29,7 @@ class ConsultingHomeController extends Controller
 {
     
     public function index(){
+        $layout= 'layouts.consulting.layout';
         $sliders=Slider::orderBy('id','asc')->where(['modelo'=>'consulting','status'=>1])->get();
         // $aboutUs = About::first();
         // $overviews=Overview::where('status',1)->get();
@@ -50,10 +51,11 @@ class ConsultingHomeController extends Controller
         $contactSetting=Setting::first();
         $websiteLang=ManageText::all();
 
-        return view('consulting.index',compact('sliders','sections','seo_text','blogs','feature_image','testimonial_bg','consultingservices','contact','contactSetting','websiteLang'));
+        return view('consulting.index',compact('layout','sliders','sections','seo_text','blogs','feature_image','testimonial_bg','consultingservices','contact','contactSetting','websiteLang'));
     }
     
     public function customPage($slug){
+        $layout= 'layouts.consulting.layout';
         $page=CustomPage::where([['modelo','consulting'],['slug',$slug]])->first();
         $websiteLang=ManageText::all();
         if(!$page){
@@ -63,10 +65,11 @@ class ConsultingHomeController extends Controller
         $menus=Navigation::all();
         $setting=Setting::all();
         $websiteLang=ManageText::all();
-        return view('user.custom-page',compact('page','banner_image','menus','setting', 'websiteLang'));
+        return view('user.custom-page',compact('layout','page','banner_image','menus','setting', 'websiteLang'));
     }
     
     public function blog(){
+        $layout= 'layouts.consulting.layout';
         Paginator::useBootstrap();
         $banner_image=BannerImage::find(5);
         $paginator=CustomPaginator::where('id',1)->first()->qty;
@@ -74,7 +77,7 @@ class ConsultingHomeController extends Controller
         $seo_text=SeoText::find(6);
         $menus=Navigation::all();
         $websiteLang=ManageText::all();
-        return view('user.blog.index',compact('banner_image','blogs','seo_text','menus','websiteLang'));
+        return view('user.blog.index',compact('layout','banner_image','blogs','seo_text','menus','websiteLang'));
     }
 
     public function blogDetails($slug){
@@ -181,7 +184,19 @@ class ConsultingHomeController extends Controller
         return back()->with($notification);
     }
 
+    public function contactUs(){
+        $layout= 'layouts.consulting.layout';
+        $contact=ContactInformation::first();
+        $contactSetting=Setting::first();
+        $seo_text=SeoText::find(7);
+        $banner_image=BannerImage::find(6);
+        $menus=Navigation::all();
+        $websiteLang=ManageText::all();
+        return view('user.contact-us',compact('layout','contact','contactSetting','seo_text','banner_image','menus','websiteLang'));
+    }
+
     public function faq(){
+        $layout= 'layouts.consulting.layout';
         $faqs=Faq::where([['modelo','consulting'],['status',1]])->get();
         $banner_image=BannerImage::find(19);
         $faq_image=BannerImage::find(20);
@@ -189,7 +204,7 @@ class ConsultingHomeController extends Controller
         $seo_text=SeoText::find(8);
         $menus=Navigation::all();
 
-        return view('user.faq',compact('banner_image','faqs','faq_image','seo_text','menus'));
+        return view('user.faq',compact('layout','banner_image','faqs','faq_image','seo_text','menus'));
 
     }
 }

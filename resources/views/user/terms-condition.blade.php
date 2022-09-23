@@ -1,10 +1,10 @@
-@extends('layouts.user.layout')
+@extends($layout)
 @section('title')
     <title>{{ $menus->where('id',15)->first()->navbar }}</title>
 @endsection
 @section('user-content')
 
-  <!--===BREADCRUMB PART START====-->
+  <!--=== INICIO BREADCRUMB ====-->
   <section class="wsus__breadcrumb" style="background: url({{ url($banner_image->image) }});">
     <div class="wsus_bread_overlay">
         <div class="container">
@@ -22,10 +22,9 @@
         </div>
     </div>
 </section>
-<!--===BREADCRUMB PART END====-->
+<!--=== FIN BREADCRUMB ====-->
 
-
-<!--=========PRIVACY PART START============-->
+<!--===  TERMINOS Y CONDICIONES ============-->
 <section class="wsus__custome_page mt_40 mb_15">
     <div class="container">
         <div class="row">
@@ -39,5 +38,5 @@
         </div>
     </div>
 </section>
-<!--=========PRIVACY PART END==========-->
+<!--=== TERMINOS Y CONDICIONES ==========-->
 @endsection
